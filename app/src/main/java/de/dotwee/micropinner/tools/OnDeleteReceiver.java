@@ -15,6 +15,6 @@ public class OnDeleteReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         int i = intent.getIntExtra(MainActivity.EXTRA_NOTIFICATION, -1);
-        new JsonHandler(context).remove(i);
+        JsonHandler.getInstance(context).remove(i);
     }
 }

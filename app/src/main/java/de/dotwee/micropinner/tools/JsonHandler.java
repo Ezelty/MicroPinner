@@ -18,12 +18,20 @@ import de.dotwee.micropinner.ui.MainActivity;
 public class JsonHandler {
     public final static String ARRAY_KEY = "pins";
     private final static String LOG_TAG = "JsonHandler";
+    private static JsonHandler instance;
     private SharedPreferences sharedPreferences;
     private Context context;
 
-    public JsonHandler(Context context) {
+    private JsonHandler(Context context) {
         this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         this.context = context;
+    }
+
+    public static synchronized JsonHandler getInstance(Context context) {
+        if (JsonHandler.instance == null)
+            JsonHandler.instance = new JsonHandler(context);
+
+        return JsonHandler.instance;
     }
 
     public JSONObject generate(String title, String content, int visibility, int priority, boolean persistent, int notification_id) {

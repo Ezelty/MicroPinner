@@ -24,7 +24,7 @@ public class OnBootReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.i(LOG_TAG, "Received boot-intent. Restoring pins...");
-        new JsonHandler(context).restore();
+        JsonHandler.getInstance(context).restore();
 
         Intent mainIntent = new Intent(context, MainActivity.class);
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
