@@ -93,11 +93,11 @@ public class JsonHandler {
 
     private void write(JSONArray jsonArray) {
         if (jsonArray == null || jsonArray.toString().isEmpty()) {
-            sharedPreferences.edit().putString(ARRAY_KEY, "{}").commit();
+            sharedPreferences.edit().putString(ARRAY_KEY, "{}").apply();
             Log.i(LOG_TAG, "write / Writing empty array.");
         }
         else {
-            sharedPreferences.edit().putString(ARRAY_KEY, jsonArray.toString()).commit();
+            sharedPreferences.edit().putString(ARRAY_KEY, jsonArray.toString()).apply();
             Log.i(LOG_TAG, "write / New array: " + jsonArray.toString());
         }
     }
@@ -108,9 +108,14 @@ public class JsonHandler {
     }
 
     public void append(JSONObject jsonObject) {
+        int id = jsonObject.optInt(MainActivity.EXTRA_NOTIFICATION);
+        remove(id);
+
         JSONArray jsonArray = get();
-        if (jsonArray != null) jsonArray.put(jsonObject);
-        if (isEnabled()) write(jsonArray);
+        if (isEnabled() && jsonArray != null) {
+            jsonArray.put(jsonObject);
+            write(jsonArray);
+        }
     }
 
     public void edit(String title, String content, int visibility, int priority, boolean persistent, int notification_id) {
