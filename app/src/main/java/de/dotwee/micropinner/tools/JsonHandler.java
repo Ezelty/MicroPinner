@@ -108,9 +108,14 @@ public class JsonHandler {
     }
 
     public void append(JSONObject jsonObject) {
+        int id = jsonObject.optInt(MainActivity.EXTRA_NOTIFICATION);
+        remove(id);
+
         JSONArray jsonArray = get();
-        if (jsonArray != null) jsonArray.put(jsonObject);
-        if (isEnabled()) write(jsonArray);
+        if (isEnabled() && jsonArray != null) {
+            jsonArray.put(jsonObject);
+            write(jsonArray);
+        }
     }
 
     public void edit(String title, String content, int visibility, int priority, boolean persistent, int notification_id) {
