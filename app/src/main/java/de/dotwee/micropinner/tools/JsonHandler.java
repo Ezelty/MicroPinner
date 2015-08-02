@@ -141,6 +141,11 @@ public class JsonHandler {
         if (isEnabled()) write(newArray);
     }
 
+    public int count() {
+        JSONArray jsonArray = get();
+        return jsonArray != null ? jsonArray.length() : 0;
+    }
+
     private boolean isEnabled() {
         return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(MainActivity.PREF_ENABLERESTORE, false);
     }
