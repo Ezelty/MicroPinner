@@ -148,7 +148,13 @@ public class JsonHandler {
 
     public int count() {
         JSONArray jsonArray = get();
-        return jsonArray != null ? jsonArray.length() : 0;
+        int count = 0;
+
+        if (jsonArray != null)
+            count = jsonArray.length();
+
+        Log.i(LOG_TAG, "count / " + count);
+        return count;
     }
 
     private boolean isEnabled() {
