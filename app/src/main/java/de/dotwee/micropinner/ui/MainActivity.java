@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         resultIntent.putExtra(EXTRA_PRIORITY, priority);
 
         notification.setContentIntent(PendingIntent.getActivity(context, id, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT));
-        JsonHandler.getInstance(context).append(title, content, visibility, priority, persistent, id);
+        new JsonHandler(context).append(title, content, visibility, priority, persistent, id);
 
         return notification.build();
     }
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_main);
-        JsonHandler.getInstance(this).restore();
+        new JsonHandler(this).restore();
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 

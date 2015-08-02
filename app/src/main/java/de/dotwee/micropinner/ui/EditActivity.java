@@ -99,11 +99,11 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
                     checkBoxPersistentPin.isChecked()
             ));
 
-            JsonHandler.getInstance(this).edit(newTitle,
-                    newContent,
-                    receivedIntent.getIntExtra(MainActivity.EXTRA_VISIBILITY, 0),
-                    receivedIntent.getIntExtra(MainActivity.EXTRA_PRIORITY, 0),
-                    checkBoxPersistentPin.isChecked(), receivedIntent.getIntExtra(MainActivity.EXTRA_NOTIFICATION, 1)
+            new JsonHandler(this).edit(newTitle,
+                                       newContent,
+                                       receivedIntent.getIntExtra(MainActivity.EXTRA_VISIBILITY, 0),
+                                       receivedIntent.getIntExtra(MainActivity.EXTRA_PRIORITY, 0),
+                                       checkBoxPersistentPin.isChecked(), receivedIntent.getIntExtra(MainActivity.EXTRA_NOTIFICATION, 1)
             );
             finish();
         }
